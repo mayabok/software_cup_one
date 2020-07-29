@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>注册</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/public/css/pc/login.css" />
+    <style>
+      .main {
+        margin-top: 1vh;
+      }
+      .phone {
+        width: 90%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="header">
+        <h1>用户注册</h1>
+      </div>
+      <!-- 
+      表单具有默认的提交行为，默认是同步的，同步表单提交，浏览器会锁死（转圈儿）等待服务端的响应结果。
+      表单的同步提交之后，无论服务端响应的是什么，都会直接把响应的结果覆盖掉当前页面。
+
+      后来有人想到了一种办法，来解决这个问题。
+      -->
+      <form id="register_form" method="post" action="/register">
+        <div class="form-group">
+          <label for="user_num">学号/工号</label>
+          <input type="text" class="form-control" id="user_num" name="user_num" placeholder="学号/工号" />
+        </div>
+        <div class="form-group">
+          <label for="password">密码</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="密码" />
+        </div>
+        <div class="form-group">
+          <label for="name">姓名</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="姓名" />
+        </div>
+
+        <div class="form-group">
+          <label>学院</label>
+          <select class="form-control" id="academy" name="academy">
+            <option value="">请选择</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>专业</label>
+          <select class="form-control" id="major" name="major">
+            <option value="">请选择</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>班级</label>
+          <select class="form-control" id="classNum" name="classNum">
+            <option value="">请选择</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="">您的职业是？</label>
+          <label> <input type="radio" name="profession" value="1" required />老师 </label>
+          <label> <input type="radio" name="profession" value="0" required />学生 </label>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block">注册</button>
+      </form>
+      <div class="message text-center">
+        <p>已有账号? <a href="/login">点击登录</a>.</p>
+      </div>
+    </div>
+
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+    <script src="/public/js/select.js"></script>
+    <script>
+      $('#register_form').on('submit', function (e) {
+        // preventDefault 阻止默认事件
+        e.preventDefault()
+        var formData = $(this).serialize()
+        // console.log(formData)
+        $.ajax({
+          url: '/register',
+          type: 'post',
+          data: formData,
+          dataType: 'json',
+          success: function (data) {
+            // console.log(data)
+            let code = data.code
+            if (code === 0) {
+              window.alert('注册成功！')
+              window.location.href = '/'
+            } else if (code === 1) {
+              window.alert('用户已经存在！')
+            } else if (code === 500) {
+              window.alert('服务器忙，请稍后重试')
+            }
+          },
+        })
+      })
+    </script>
+  </body>
+</html>

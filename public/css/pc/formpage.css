@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+}
+.inner {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 2vh;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-bottom: 5vh;
+}
+.inner:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.inner h1 {
+  text-align: center;
+  margin-top: 10vh;
+}
+.inner div.form_ifo {
+  margin-top: 5vh;
+  margin-left: 5%;
+  float: left;
+  margin-bottom: 5vh;
+}
+.inner div.form_ifo p {
+  color: #bbbbbb;
+  margin-top: 1vh;
+}
+.inner div.form_ifo p span {
+  color: black;
+}
+.inner hr {
+  display: block;
+  clear: both;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 5vh;
+}
+.inner .form {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5vh;
+  overflow: hidden;
+}
+.inner .form button {
+  float: right;
+}
+.inner .form a {
+  float: right;
+}
+.inner .form .required {
+  color: red;
+}
+.inner .form label {
+  display: block;
+  margin-bottom: 2vh;
+}
+.inner .form .form-group .answer {
+  margin-left: 2vw;
+  margin-bottom: 6vh;
+}
+.inner .form .form-control {
+  display: inline-block;
+  width: 20%;
+  margin-right: 2%;
+}
+.inner .form button {
+  margin-top: 5vh;
+}
+.inner .form a {
+  margin-top: 5vh;
+}

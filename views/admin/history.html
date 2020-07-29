@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../favicon.ico" />
+
+    <title>信息管理页面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/public/css/pc/dashboard.css" rel="stylesheet" />
+
+    <style>
+      .chart {
+        width: 100%;
+        height: 300px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border-radius: 5px;
+      }
+      .chart:hover {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      }
+
+      /* 添加 */
+      
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">信息管理页面</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">退出登录</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" action="/history/search" method="POST">
+            <input type="text" class="form-control" placeholder="搜索..." name="search"/>
+            <button class="btn btn-default" type="submit">搜索</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="/dashboard">控制台</a></li>
+            <li class="active"><a href="/history">往日数据</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+          <h2 class="sub-header">往日数据</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>姓名</th>
+                  <th>学号</th>
+                  <th>家庭住址</th>
+                  <th>所在单位</th>
+                  <th>健康状况</th>
+                  <th>提交时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = data.length - 1; i >= 0; i--){ %>
+                <tr>
+                  <td>{{ data[i].name }}</td>
+                  <td>{{ data[i].user_num }}</td>
+                  <td>{{ data[i].province }}-{{ data[i].city }}-{{ data[i].area }}</td>
+                  <td>{{ data[i].unit }}</td>
+                  <td>
+                    <% for(var j =0; j < data[i].health_condition.length; j++){ %>
+                      {{ health_option[data[i].health_condition[j]] }}
+                    <% } %>
+                  </td>
+                  <td>{{ data[i].submit_time_format }}</td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- 一些数据 -->
+  </body>
+</html>

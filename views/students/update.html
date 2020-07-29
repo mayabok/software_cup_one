@@ -1,0 +1,107 @@
+{{extend '../_layouts/home.html'}}
+
+{{block 'title'}}{{'填写表单'}}{{/block}}
+
+{{block 'head'}}
+  <link rel="stylesheet" href="/public/css/pc/formpage.css">
+{{/block}}
+
+{{block 'body'}}
+<section class="container disabled">
+    <div class="inner">
+    <h1>安徽师范大学疫情防控情况调查表（{{ issue_time }}）</h1>
+
+    <div class="form_ifo">
+      <p>填写截止时间：<span>{{ cut_of_time }} 23:59:59</span></p>
+    </div>
+
+    <hr>
+
+    <div class="form">
+
+      <form id="health_form">
+        <div class="form-group">
+          <label for="address">1、当前，你所处的位置是？<span class="required">（必填）</span></label>
+          <div class="answer" id="location" data-toggle="distpicker">
+            <select class="form-control" name="province" id="province"  data-province="请选择省">
+            </select>
+            <select class="form-control" name="city" id="city" data-city="请选择市">
+            </select>
+            <select class="form-control" name="area" id="area"  data-district="请选择区">
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="">2、当前，你所在的单位是？<span class="required">（必填）</span></label>
+          <div class="radio answer" id="unit">
+            <label>
+              <input type="radio" name="unit" value="居家" required >居家
+            </label>
+            <label>
+              <input type="radio" name="unit" value="住校" required >在校
+            </label>
+          </div>
+        </div>
+
+        <!-- health_option: GLOBAL.health_option -->
+        <div class="form-group">
+          <label for="">3、今天，你的身体健康状况如何？（可多选）<span class="required">（必填）</span></label>
+            <div class="checkbox answer" required id="health_condition">
+              <!-- <label>
+                <input type="checkbox" name="health_condition" value="健康"
+                id="test"
+                trigger=""
+                data-container="body" 
+                data-toggle="popover" 
+                data-placement="bottom" 
+                data-content="请至少选择一个">
+                健康
+              </label>
+              <label>
+                <input type="checkbox" name="health_condition" value="异常">
+                异常
+              </label> -->
+
+              <% for(var i = 0; i < health_option.length; i++){ %>
+                {{ if i === 0 }}
+                <label>
+                  <input type="checkbox" name="health_condition" value={{ i }}
+                  id="test"
+                  trigger=""
+                  data-container="body" 
+                  data-toggle="popover" 
+                  data-placement="bottom" 
+                  data-content="请至少选择一个"
+                  >
+                  {{ health_option[i] }}
+                </label>
+                {{ else if i !== 0 }}
+                <label>
+                  <input type="checkbox" name="health_condition" value={{ i }} >
+                  {{ health_option[i] }}
+                </label>
+                {{ /if }}
+              <% } %>
+              
+            </div>
+        </div>
+
+        <!-- 表单提交按钮 START -->
+        <button class="btn btn-primary" id="button_submit" type="submit">
+          提交
+        </button>
+        <!-- 表单提交按钮 END -->
+
+      </form>
+    </div>
+  </div>
+
+</section>
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/node_modules/distpicker/dist/distpicker.js"></script>
+<script src="/public/js/update.js"></script>
+{{block 'script'}}
+{{/block}}
+{{/block}}

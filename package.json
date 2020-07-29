@@ -1,0 +1,21 @@
+{
+  "name": "project",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "blueimp-md5": "^2.16.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^3.3.7",
+    "distpicker": "^2.0.6",
+    "echarts": "^4.8.0",
+    "express": "^4.17.1",
+    "express-art-template": "^1.0.1",
+    "express-session": "^1.17.1",
+    "jquery": "^1.12.4",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.21"
+  },
+  "bin" : "app.js",
+  "pkg": {
+    "assets": ["public/**/*", "views/**/*", "api/**/*", "models/**/*"]
+  }
+}

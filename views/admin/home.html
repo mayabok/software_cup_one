@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../favicon.ico" />
+
+    <title>信息管理页面</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/public/css/pc/dashboard.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/public/css/pc/home.css">
+  </head>
+
+  <body>
+    <!-- <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-expanded="false"
+            aria-controls="navbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">信息管理页面</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">退出登录</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="搜索..." name="search"/>
+            <button class="btn btn-default" type="submit">搜索</button>
+          </form>
+        </div>
+      </div>
+    </nav> -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">信息管理页面</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout">退出登录</a></li>
+            <li id="unShow"><a href="/history">往日数据</a></li>
+          </ul>
+          <form class="navbar-form navbar-right" action="/dashboard/search" method="POST">
+            <input type="text" class="form-control" placeholder="搜索..." name="search"/>
+            <button class="btn btn-default" type="submit" id="search_btn">搜索</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active">
+              <a href="/dashboard">控制台<span class="sr-only">(current)</span></a>
+            </li>
+            <li><a href="/history">往日数据</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div id="submit_status" class="chart"></div>
+            </div>
+            <div class="col-xs-6 col-sm-6 placeholder">
+              <div id="health_status" class="chart"></div>
+            </div>
+          </div>
+
+          <h2 class="sub-header">今日数据</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>姓名</th>
+                  <th>学号</th>
+                  <th>家庭住址</th>
+                  <th>所在单位</th>
+                  <th>健康状况</th>
+                  <th>提交时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(var i = data.length - 1; i >= 0; i--){ %>
+                <tr>
+                  <td>{{ data[i].name }}</td>
+                  <td>{{ data[i].user_num }}</td>
+                  <td>{{ data[i].province }}-{{ data[i].city }}-{{ data[i].area }}</td>
+                  <td>{{ data[i].unit }}</td>
+                  <td>
+                    <% for(var j =0; j < data[i].health_condition.length; j++){ %>
+                      {{ health_option[data[i].health_condition[j]] }}
+                    <% } %>
+                  </td>
+                  <td>{{ data[i].submit_time_format }}</td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    {{include '../_partials/footer.html'}}
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/node_modules/echarts/dist/echarts.min.js"></script>
+    <script src="/public/js/search.js"></script>
+    <!-- 一些数据 -->
+    <script src="/public/js/charts.js"></script>
+
+  </body>
+</html>
